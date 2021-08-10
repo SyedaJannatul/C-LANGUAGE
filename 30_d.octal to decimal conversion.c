@@ -1,3 +1,4 @@
+//octal to decimal conversion [fractional number]
 #include<stdio.h>
 #include<math.h>
 #include <string.h>
@@ -31,7 +32,7 @@ int main()
     while (ingral != 0)
     {
         rem = ingral % 10;
-        decimal_num = decimal_num + rem * pow(2,i);
+        decimal_num = decimal_num + rem * pow(8,i);
         ingral = ingral / 10;
         i++;
     }
@@ -42,7 +43,7 @@ int main()
     // if given number has fractional part
     if(fraction)
     {
-        for(int k=0;k<after_decimal;k++)
+        for(k=0;k<after_decimal;k++)
         {
             a = 10*fraction;
             b = a;
@@ -52,7 +53,7 @@ int main()
             printf("\n");
             printf("j=%d",j);
             printf("\n");
-            fun=fun+(b*(pow(2,j)));
+            fun=fun+(b*(pow(8,j)));
             printf("fun=%f",fun);
             printf("\n");
             fraction=a-b;
