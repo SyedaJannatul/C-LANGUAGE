@@ -7,86 +7,64 @@ int main()
 {
     //string to number conversion
     char num[100];
-    int count=0,len,after_decimal,integral,intig,b,k,j=-1,m;
-    double fraction,fractionwithint,a,fun=0.0,sum;
+    int count=0,len,k=-1,j=0,dotpos,i=0,intcount,fraccount,rem,decnum=0,frac,rm;
+    double fracnum=0.0,sum=0.0;
     printf("Enter hexadecimal number : ");
     gets(num);
     len = strlen(num);
-    for(m=0;m<len;m++)
+    printf("length = %d",len);
+    while(num[i]!='\0')
     {
-        if(num[m]=='A'){
-            num[m]='10';}
-        else if(num[m]=='B'){
-            num[m]='11';}
-        else if(num[m]=='C'){
-            num[m]='12';}
-        else if(num[m]=='D'){
-            num[m]='13';}
-        else if(num[m]=='E'){
-            num[m]='14';}
-        else if(num[m]=='F'){
-            num[m]='15';}
-        else
-            return 0;
-    }
-    puts(num);
-    /*integral = atof(num);
-    fractionwithint = atof(num);
-    fraction = fractionwithint-integral;
-    printf("Converting string to int : %d\n", integral);
-    printf("Converting string to float : %f\n", fraction);
-
-    intig=integral;
-    while(intig!=0){
-        intig = intig/10;
+        if(num[i]=='.'){
+            dotpos = i;
+            break;}
         count++;
-    }
-    len = strlen(num);//Total number of digits including '.'
-    after_decimal= len-count-1;//because string end with '\0'
-    printf("Number of digits after decimal points are %d\n",after_decimal);
-
-    //integral part
-    int i=0,rem,decimal_num=0,ingral;
-    ingral=integral;
-    while (ingral != 0)
-    {
-        rem = ingral % 10;
-        decimal_num = decimal_num + rem * pow(8,i);
-        ingral = ingral / 10;
         i++;
     }
-    printf("\n\n");
-    printf("Integral: %d ",decimal_num);
-    printf("\n\n");
-
-    // if given number has fractional part
-    if(fraction)
+    printf("len integer = %d\n",count);
+    printf("dot point index = %d\n",dotpos);
+    fraccount=len-1-count;
+    printf("len fraction = %d",fraccount);
+    intcount=count-1;
+    while(intcount>=0)
     {
-        for(k=0;k<after_decimal;k++)
-        {
-            a = 10*fraction;
-            b = a;
-            printf("a=%f",a);
-            printf("\n");
-            printf("b = %d",b);
-            printf("\n");
-            printf("j=%d",j);
-            printf("\n");
-            fun=fun+(b*(pow(8,j)));
-            printf("fun=%f",fun);
-            printf("\n");
-            fraction=a-b;
-            printf("fraction=%f",fraction);
-            printf("\n");
-            printf(".....");
-            printf("\n");
-            j--;
-        }
-        printf("fractional:\n");
-        printf("%f",fun);
-        printf("\n");
+            rem = num[intcount];
+            if(rem>=48 && rem<=57)
+                rem = rem-48;
+            else if(rem>=65 && rem<=70)
+                rem = rem-55;
+            else
+            {
+                printf("\nYou've entered an invalid Hexadecimal digit");
+                return 0;
+            }
+            decnum = decnum + (rem*pow(16, j));
+            intcount--;
+            j++;
     }
-    sum=decimal_num+fun;
-    printf("\nthe decimal equivalent = %f",sum);*/
+    printf("\nEquivalent Decimal Value = %d", decnum);
+
+    frac=count+1;
+    while(frac<len)
+    {
+            rm = num[frac];
+            if(rm>=48 && rm<=57)
+                rm = rm-48;
+            else if(rm>=65 && rm<=70)
+                rm = rm-55;
+            else
+            {
+                printf("\nYou've entered an invalid Hexadecimal digit");
+                return 0;
+            }
+            printf("\nrm = %d\n",rm);
+            fracnum = fracnum + (rm*pow(16, k));
+            printf("fracrm = %f\n\n",fracnum);
+            frac++;
+            k--;
+    }
+    printf("\nEquivalent Decimal Value = %f", fracnum);
+    sum=decnum+fracnum;
+    printf("\nthe decimal conversion = %f",sum);
     return 0;
 }

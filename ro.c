@@ -3,10 +3,8 @@
 #include<math.h>
 void main()
 {
-double a;
-int b;
-a=1.000000;
-b=a;
-printf("%d",b);
+    int a[5]={1,2,3},*b;
+    b=a;
+    printf("%d",&b);
 
 }
